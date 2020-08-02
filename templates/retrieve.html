@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'bootstrap-3.3.7-dist/css/bootstrap.min.css' %}">
+    <link rel="stylesheet" href="{% static 'bootstrap-3.3.7-dist/css/animate.css' %}">
+    <script src="{% static 'script/jquery-3.3.1.min.js' %}"></script>
+    <script src="{% static 'bootstrap-3.3.7-dist/js/bootstrap.min.js' %}"></script>
+    <link rel="stylesheet" href="{% static 'css/myCss.css' %}">
+    <script src="{% static 'script/my.js' %}"></script>
+</head>
+<body>
+<div class="container">
+    <table class="table table-striped">
+        <caption class="text-center"><h1>学生信息表</h1></caption>
+        <thead>
+            <tr>
+                <th class="text-center">姓名</th>
+                <th class="text-center">性别</th>
+                <th class="text-center">年龄</th>
+                <th class="text-center">地址</th>
+                <th class="text-center">操作</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for datum in data %}
+                <tr>
+                    <td>{{ datum.name }}</td>
+                    {% if datum.gender %}
+                        <td>女</td>
+                    {% else %}
+                        <td>男</td>
+                    {% endif %}
+                    <td>{{ datum.age }}</td>
+                    <td>{{ datum.address }}</td>
+                    <td>
+                        <button type="button" class="btn btn-warning" onclick="updateStudent('{{ datum.id }}')">修改</button>
+                        <button type="button" class="btn btn-danger" onclick="deleteStudent('{{ datum.id }}')">删除</button>
+                    </td>
+                </tr>
+            {% empty %}
+                this is None.
+            {% endfor %}
+        </tbody>
+    </table>
+    <p class="text-center back"><a href="/">返回首页</a></p>
+</div>
+</body>
+</html>

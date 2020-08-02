@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'bootstrap-3.3.7-dist/css/bootstrap.min.css' %}">
+    <link rel="stylesheet" href="{% static 'bootstrap-3.3.7-dist/css/animate.css' %}">
+    <script src="{% static 'script/jquery-3.3.1.min.js' %}"></script>
+    <script src="{% static 'bootstrap-3.3.7-dist/js/bootstrap.min.js' %}"></script>
+    <link rel="stylesheet" href="{% static 'css/myCss.css' %}">
+</head>
+<body>
+<div class="container">
+    <form action="/update/{{ stu.id }}" method="post" class="form-horizontal">
+        {% csrf_token %}
+        <table class="table table-striped text-center">
+            <caption class="text-center"><h1>修改学生信息</h1></caption>
+            <tbody>
+                <tr>
+                    <td><label class="control-label labelName" for="name">name: </label></td>
+                    <td colspan="2"><input type="text" placeholder="please" name="name" class="form-control" id="name" value="{{ stu.name }}"></td>
+                </tr>
+                <tr>
+                    <td><label class="control-label labelName" for="sex">gender: </label></td>
+                    {% ifequal stu.gender 0 %}
+                        <td><input type="radio" value="0" name="gender" id="sex" style="width: 20px;height: 20px;" checked>男</td>
+                        <td><input type="radio" value="1" name="gender" id="sex" style="width: 20px;height: 20px;">女</td>
+                    {% else %}
+                        <td><input type="radio" value="0" name="gender" id="sex" style="width: 20px;height: 20px;">男</td>
+                        <td><input type="radio" value="1" name="gender" id="sex" style="width: 20px;height: 20px;" checked>女</td>
+                    {% endifequal %}
+                </tr>
+                <tr>
+                    <td><label class="control-label labelName" for="age">age: </label></td>
+                    <td colspan="2"><input type="number" max="120" min="0" name="age" placeholder="please" class="form-control" id="age" value="{{ stu.age }}"></td>
+                </tr>
+                <tr>
+                    <td><label class="control-label labelName" for="addr">address: </label></td>
+                    <td colspan="2"><input type="text" placeholder="please" name="address" class="form-control" id="addr" value="{{ stu.address }}"></td>
+                </tr>
+                <tr>
+                    <td colspan="3"><input type="submit" class="btn btn-default"></td>
+                </tr>
+            </tbody>
+        </table>
+    </form>
+    <a href="/">返回首页</a>
+</div>
+
+</body>
+</html>
